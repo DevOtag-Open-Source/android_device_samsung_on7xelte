@@ -15,7 +15,8 @@
 
 #Camera
  PRODUCT_PACKAGES += \
-    libcamhelpr \
+    camera.universal7870 \
+    libstagefright_shim \
     camera.device@3.2-impl \
     camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
