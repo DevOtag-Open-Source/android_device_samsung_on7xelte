@@ -21,11 +21,11 @@ import static com.android.internal.telephony.RILConstants.*;
 
 import android.content.Context;
 import android.telephony.Rlog;
-import android.os.AsyncResult;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SignalStrength;
 import android.telephony.SmsManager;
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
@@ -47,17 +47,13 @@ public class SlteRIL extends RIL {
     static final boolean RILJ_LOGD = true;
     static final boolean RILJ_LOGV = true;
 
-    private static final int SAMSUNG_UNSOL_RESPONSE_BASE = 11000;
     private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10001;
     private static final int RIL_UNSOL_STK_SEND_SMS_RESULT = 11002;
     private static final int RIL_UNSOL_STK_CALL_CONTROL_RESULT = 11003;
 
     private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
-    private static final int RIL_UNSOL_GPS_NOTI = 11009;
     private static final int RIL_UNSOL_AM = 11010;
-    private static final int RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL = 11011;
     private static final int RIL_UNSOL_SIM_PB_READY = 11021;
-    private static final int RIL_UNSOL_SIM_SWAP_STATE_CHANGED = 11057;
 
     private static final int RIL_UNSOL_WB_AMR_STATE = 20017;
 
@@ -93,6 +89,47 @@ public class SlteRIL extends RIL {
     public void
     acceptCall(Message result) {
         acceptCall(0, result);
+    }
+
+    /**
+     *  Translates EF_SMS status bits to a status value compatible with
+     *  SMS AT commands.  See TS 27.005 3.1.
+     */
+    private int translateStatus(int status) {
+        switch(status & 0x7) {
+            case SmsManager.STATUS_ON_ICC_READ:
+                return 1;
+            case SmsManager.STATUS_ON_ICC_UNREAD:
+                return 0;
+            case SmsManager.STATUS_ON_ICC_SENT:
+                return 3;
+            case SmsManager.STATUS_ON_ICC_UNSENT:
+                return 2;
+        }
+
+        // Default to READ.
+        return 1;
+    }
+
+    @Override
+    public void writeSmsToSim(int status, String smsc, String pdu, Message response) {
+        status = translateStatus(status);
+
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_WRITE_SMS_TO_SIM,
+                                          response);
+
+        rr.mParcel.writeInt(status);
+        rr.mParcel.writeString(pdu);
+        rr.mParcel.writeString(smsc);
+        rr.mParcel.writeInt(255);     /* Samsung */
+
+        if (RILJ_LOGV) {
+            riljLog(rr.serialString() + "> "
+                    + requestToString(rr.mRequest)
+                    + " " + status);
+        }
+
+        send(rr);
     }
 
     @Override
@@ -276,6 +313,48 @@ public class SlteRIL extends RIL {
         return response;
     }
 
+    @Override
+    protected Object
+    responseSignalStrength(Parcel p) {
+        int gsmSignalStrength = p.readInt() & 0xff;
+        int gsmBitErrorRate = p.readInt();
+        int cdmaDbm = p.readInt();
+        int cdmaEcio = p.readInt();
+        int evdoDbm = p.readInt();
+        int evdoEcio = p.readInt();
+        int evdoSnr = p.readInt();
+        int lteSignalStrength = p.readInt();
+        int lteRsrp = p.readInt();
+        int lteRsrq = p.readInt();
+        int lteRssnr = p.readInt();
+        int lteCqi = p.readInt();
+        int tdScdmaRscp = p.readInt();
+        // constructor sets default true, makeSignalStrengthFromRilParcel does not set it
+        boolean isGsm = true;
+
+        if ((lteSignalStrength & 0xff) == 255 || lteSignalStrength == 99) {
+            lteSignalStrength = 99;
+            lteRsrp = SignalStrength.INVALID;
+            lteRsrq = SignalStrength.INVALID;
+            lteRssnr = SignalStrength.INVALID;
+            lteCqi = SignalStrength.INVALID;
+        } else {
+            lteSignalStrength &= 0xff;
+        }
+
+        if (RILJ_LOGD)
+            riljLog("gsmSignalStrength:" + gsmSignalStrength + " gsmBitErrorRate:" + gsmBitErrorRate +
+                    " cdmaDbm:" + cdmaDbm + " cdmaEcio:" + cdmaEcio + " evdoDbm:" + evdoDbm +
+                    " evdoEcio: " + evdoEcio + " evdoSnr:" + evdoSnr +
+                    " lteSignalStrength:" + lteSignalStrength + " lteRsrp:" + lteRsrp +
+                    " lteRsrq:" + lteRsrq + " lteRssnr:" + lteRssnr + " lteCqi:" + lteCqi +
+                    " tdScdmaRscp:" + tdScdmaRscp + " isGsm:" + (isGsm ? "true" : "false"));
+
+        return new SignalStrength(gsmSignalStrength, gsmBitErrorRate, cdmaDbm, cdmaEcio, evdoDbm,
+                evdoEcio, evdoSnr, lteSignalStrength, lteRsrp, lteRsrq, lteRssnr, lteCqi,
+                tdScdmaRscp, isGsm);
+    }
+
     private void constructGsmSendSmsRilRequest(RILRequest rr, String smscPDU, String pdu) {
         rr.mParcel.writeInt(2);
         rr.mParcel.writeString(smscPDU);
@@ -347,21 +426,10 @@ public class SlteRIL extends RIL {
             case RIL_UNSOL_WB_AMR_STATE:
             case RIL_UNSOL_DEVICE_READY_NOTI: /* Registrant notification */
             case RIL_UNSOL_SIM_PB_READY: /* Registrant notification */
-            case RIL_UNSOL_GPS_NOTI: /* GPS notification */
                 Rlog.v(RILJ_LOG_TAG,
                        "XMM7260: ignoring unsolicited response " +
                        origResponse);
                 return;
-            case RIL_UNSOL_SIM_SWAP_STATE_CHANGED:
-                newResponse = RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED;
-                break;
-            default:
-                if (origResponse >= SAMSUNG_UNSOL_RESPONSE_BASE) {
-                    Rlog.v(RILJ_LOG_TAG,
-                          "XMM7260: unknown unsolicited response " +
-                          origResponse);
-                }
-                break;
         }
 
         if (newResponse != origResponse) {
@@ -374,18 +442,9 @@ public class SlteRIL extends RIL {
         switch (newResponse) {
             case RIL_UNSOL_AM:
                 ret = responseString(p);
-                // Add debug to check if this wants to execute any useful am command
-                Rlog.v(RILJ_LOG_TAG, "XMM7260: am=" + (String)ret);
                 break;
             case RIL_UNSOL_STK_SEND_SMS_RESULT:
                 ret = responseInts(p);
-                if (mCatSendSmsResultRegistrant != null) {
-                    mCatSendSmsResultRegistrant.notifyRegistrant(
-                        new AsyncResult(null, ret, null));
-                }
-                break;
-            case RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL:
-                ret = responseVoid(p);
                 break;
             default:
                 // Rewind the Parcel
@@ -394,6 +453,14 @@ public class SlteRIL extends RIL {
                 // Forward responses that we are not overriding to the super class
                 super.processUnsolicited(p, type);
                 return;
+        }
+
+        switch (newResponse) {
+            case RIL_UNSOL_AM:
+                String strAm = (String)ret;
+                // Add debug to check if this wants to execute any useful am command
+                Rlog.v(RILJ_LOG_TAG, "XMM7260: am=" + strAm);
+                break;
         }
     }
 }
