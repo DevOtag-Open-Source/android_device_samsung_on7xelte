@@ -879,6 +879,11 @@ on charger
     write /sys/class/power_supply/battery/batt_update_data "/efs/Battery/battery_data.dat"
     class_start charger
 
+service drm /system/bin/drmserver
+     class main
+     user drm
+     group drm system inet drmrpc
+
 on property:vold.decrypt=trigger_reset_main
     class_reset main
 
