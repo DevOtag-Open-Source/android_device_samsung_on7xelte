@@ -1,3 +1,4 @@
+#
 # Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-#Camera
- PRODUCT_PACKAGES += \
-    camera.universal7870 \
-    libstagefright_shim \
-    libcamera_client_shim \
-    camera.device@3.2-impl \
-    camera.device@1.0-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := CameraParameters.cpp
+
+LOCAL_MODULE := libcamera_client_shim
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+
+include $(BUILD_SHARED_LIBRARY)

@@ -15,4 +15,5 @@
 
 # Shim
 TARGET_LD_SHIM_LIBS += \
-    /system/lib/libexynoscamera.so|/vendor/lib/libcamhelpr.so
+    /system/lib/libcamera_client.so|libcamera_client_shim.so \
+    /system/lib/libstagefright.so|/vendor/lib/libstagefright_shim.so
