@@ -930,11 +930,10 @@ on property:persist.sys.storage_preload=0
     start umount_service
 
 # SSWAP
-service swapon /sbin/sswap -s
+service sswap /sbin/sswap -s
     class core
     user root
     group root
-    seclabel u:r:sswap:s0
     oneshot
 
 # sem_daemon
