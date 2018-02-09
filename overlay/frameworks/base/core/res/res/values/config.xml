@@ -221,4 +221,8 @@
 
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
     <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
+
+   <!-- Control whether Night display is available. This should only be enabled on devices
+         with HWC 2.0 or higher. -->
+    <bool name="config_nightDisplayAvailable">true</bool>
 </resources>
