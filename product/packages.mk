@@ -20,3 +20,7 @@ PRODUCT_PACKAGES += \
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
+
+# Skeletons
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0
