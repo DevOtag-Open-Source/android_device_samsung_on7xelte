@@ -16,5 +16,8 @@
 
 LOCAL_PATH := device/samsung/exynos7870-common
 
+# Include headers
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
+
 # Inherit splitted common board configs
 -include $(LOCAL_PATH)/board/*.mk
