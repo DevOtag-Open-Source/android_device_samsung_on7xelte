@@ -14,4 +14,4 @@
 #
 
 # Samsung Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS := device/samsung/exynos7870-common/lineagehw
