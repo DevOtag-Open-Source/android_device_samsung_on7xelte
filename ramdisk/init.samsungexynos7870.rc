@@ -1,8 +1,6 @@
 import init.samsungexynos7870.usb.rc
 import init.baseband.rc
-import init.carrier.rc
 import init.wifi.rc
-import init.fac.rc
 import init.samsung.rc
 
 on early-init
