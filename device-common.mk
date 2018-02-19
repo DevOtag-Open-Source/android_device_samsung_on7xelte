@@ -15,3 +15,6 @@
 #
 
 LOCAL_PATH := device/samsung/exynos7870-common
+
+# Inherit splitted common product configs
+-include $(LOCAL_PATH)/product/*.mk

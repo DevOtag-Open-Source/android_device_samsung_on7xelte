@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter exynos7870, $(TARGET_SOC)),)
+ifneq ($(filter a3y17lte gtactive2lte gtaxlte j5y17lte j7velte j7xelte j7y17lte on7xelte, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
