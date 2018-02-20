@@ -19,3 +19,5 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Use these flags if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
+
+TARGET_USES_MKE2FS := true
