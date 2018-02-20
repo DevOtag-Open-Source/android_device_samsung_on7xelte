@@ -15,4 +15,5 @@
 
 # Power
 PRODUCT_PACKAGES += \
-    power.universal7870
+    power.universal7870 \
+    android.hardware.power@1.0-impl
