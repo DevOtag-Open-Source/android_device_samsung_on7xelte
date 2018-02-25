@@ -8,6 +8,8 @@
 	Copyright (C) 2018 Shivam Jha
 	Copyright (C) 2018 Mohi1117
 	Copyright (C) 2018 Oves Bilal
+	Copyright (C) 2018 Sean Hoyt
+
 
 ### License
 Apache License 2.0 (Apache-2.0) (Located at LICENSE, read more at [tldrlegal.com/license/apache-license-2.0](https://tldrlegal.com/license/apache-license-2.0-%28apache-2.0%29))
@@ -38,4 +40,3 @@ Short (no legal advice) summary of the used license:
  * **Include License**
  * **State Changes**
  * **Include Notice**
-
