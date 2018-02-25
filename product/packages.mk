@@ -13,10 +13,6 @@
 # limitations under the License.
 #
 
-# Samsung
-PRODUCT_PACKAGES += \
-    SamsungServiceMode
-
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
