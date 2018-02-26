@@ -17,10 +17,13 @@
 LOCAL_PATH := device/samsung/exynos7870-common
 
 # Include headers
-TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/exynos7870-common/include
 
-#Hidl
+# Hidl
 DEVICE_MANIFEST_FILE := device/samsung/exynos7870-common/manifest.xml
+
+# SELinux
+BOARD_SEPOLICY_DIRS := device/samsung/exynos7870-common/sepolicy
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop

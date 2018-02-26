@@ -1,0 +1,26 @@
+# /efs
+allow system_server efs_file:dir r_dir_perms;
+
+# /efs/FactoryApp/gyro_cal_data
+allow system_server sensor_efs_file:file r_file_perms;
+
+# /data/system/gps/chip.info
+allow system_server gps_data_file:file r_file_perms;
+
+# /efs/FactoryApp
+allow system_server app_efs_file:dir r_dir_perms;
+allow system_server app_efs_file:file r_file_perms;
+
+# WifiMachine
+allow system_server self:capability { sys_module };
+allow system_server wifi_efs_file:dir r_dir_perms;
+allow system_server wifi_efs_file:file r_file_perms;
+
+# mDNIE
+allow system_server sysfs_mdnie_writable:lnk_file rw_file_perms;
+allow system_server sysfs_mdnie_writable:dir rw_dir_perms;
+allow system_server sysfs_mdnie_writable:file rw_file_perms;
+
+# memtrack HAL
+allow system_server debugfs:dir r_dir_perms;
+allow system_server debugfs:file r_file_perms;

@@ -1,0 +1,20 @@
+# /dev/s5p-smem
+type secmem_device, dev_type;
+
+# /dev/umts*
+type mif_device, dev_type;
+
+# /dev/block/mmcblk0p[0-9]
+type emmcblk_device, file_type;
+
+# /dev/rfkill
+type rfkill_device, dev_type;
+
+# efs
+type efs_block_device, dev_type;
+
+# radio
+type radio_block_device, dev_type;
+
+# gps
+type gps_device, dev_type;
