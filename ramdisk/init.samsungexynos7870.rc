@@ -10,9 +10,6 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
-
-    mkdir /preload 0771 system system
-
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -803,19 +800,6 @@ service gpsd /system/bin/gpsd
     user gps
     group system inet wakelock
     ioprio be 0
-
-# umount service
-service umount_service /system/bin/umount -D /preload
-    disabled
-    oneshot
-
-# Support Preload install apks
-on property:persist.sys.storage_preload=1
-    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/HIDDEN /preload nosuid nodev ro barrier=1
-    setprop storage.preload.complete 1
-
-on property:persist.sys.storage_preload=0
-    start umount_service
 
 # SSWAP
 service sswap /sbin/sswap -s
