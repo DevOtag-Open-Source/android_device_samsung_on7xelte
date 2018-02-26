@@ -4,29 +4,11 @@
 #
 
 on init
-
-    ffu
-
 # [ SEC_SELINUX_PORTING_COMMON
     # for audit message
     chown system system /proc/avc_msg
     chmod 0660 /proc/avc_msg
 # ] SEC_SELINUX_PORTING_COMMON
-
-## Samsung ODE >>>
-    # Create private mountpoint so we can MS_MOVE from staging
-    mount tmpfs tmpfs /mnt/secure mode=0700,uid=0,gid=0
-
-    # Directory for staging bindmounts
-    mkdir /mnt/secure/staging 0700 root root
-    restorecon_recursive /mnt/secure/staging
-## Samsung ODE <<<
-
-    # Directory-target for where the secure container
-    # imagefile directory will be bind-mounted
-    mkdir /mnt/secure/asec 0700 root root
-    mount tmpfs tmpfs /mnt/secure/asec mode=0700,uid=0,gid=0
-    restorecon_recursive /mnt/secure/asec
 
     # Storage views to support runtime permissions
     mkdir /storage 0755 root root
@@ -231,12 +213,6 @@ on post-fs
     # mobicore
     setprop sys.mobicoredaemon.enable stopped
 
-## Samsung ODE >>>
-    mount tmpfs tmpfs /mnt/secure private rec
-## Samsung ODE <<<
-
-    mount tmpfs tmpfs /mnt/secure/asec shared rec
-
     #change permissions on kmsg & sysrq-trigger so bugreports can grab kthread stacks
     chown root system /proc/kmsg
     chmod 0440 /proc/kmsg
@@ -370,11 +346,6 @@ on post-fs-data
     mkdir /dev/socket/uibc 0777 media system
     chown media system /dev/socket/uibc
     chmod 0775 /dev/socket/uibc
-
-    # VaultKeeper socket
-    mkdir /dev/socket/vaultkeeper 0770 system system
-    chown system system /dev/socket/vaultkeeper
-    chmod 0770 /dev/socket/vaultkeeper
 
     # Chooser/Resolver
     cpyContent_rmdir /data/user/0/system:ui
@@ -766,10 +737,6 @@ on boot
 
 # HMT relay mode
     chown radio system /sys/devices/virtual/relay_on
-
-# KNOX_NAP
-    chmod 0660 /dev/ncm_dev
-    chown system system /dev/ncm_dev
 
 # UFS
     chown system system /sys/block/sda/device/model
