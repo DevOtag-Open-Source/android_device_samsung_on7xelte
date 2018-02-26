@@ -224,10 +224,8 @@ on load_persist_props_action
     load_persist_props
     start logd
     start logd-reinit
-    start scs
 
 on post-fs
-    start sec-sh
     start logd
 
     # mobicore
@@ -271,16 +269,6 @@ on post-fs-data
     chmod 0644 /efs/h2k.dat
     chmod 0644 /efs/cpk/h2k.dat
     chown system system /efs/drm/h2k
-
-    # icd
-    check_icd
-    chown system system /dev/icd
-    chmod 0644 /dev/icd
-    chown system system /dev/icdr
-    chmod 0644 /dev/icdr
-    chown system system /dev/tzic
-    restorecon /dev/icd
-    restorecon /dev/icdr
 
     #SideSync
     chown system system /dev/android_ssusbcon
@@ -345,9 +333,6 @@ on post-fs-data
 
     mkdir /data/misc/profman 0770 system shell
 
-    #OTP
-    mkdir /data/otp 0700 system system
-
     # MST/NFC Switch
     chown spay system /dev/mst_ctrl
     chmod 0660 /dev/mst_ctrl
@@ -359,13 +344,6 @@ on post-fs-data
 	#MST-MFC Support
     chown system system /sys/class/mstldo/mst_drv/mfc
     chmod 0770 /sys/class/mstldo/mst_drv/mfc
-
-# [ SEC_SELINUX_PORTING_COMMON
-    mkdir /data/misc/audit 0775 audit system
-
-    # start auditd
-    start auditd
-# ] SEC_SELINUX_PORTING_COMMON
 
     # ATT CIQ
     mkdir /data/iq_archive 0771 system system
@@ -405,12 +383,6 @@ on post-fs-data
     # FIDO
     mkdir /data/.fido 0700 system system
 
-# [ SEC_SELINUX_PORTING_COMMON
-    # reload_policy is move to above
-    # Reload policy from /data/security if present.
-    #setprop selinux.reload_policy 1
-# ] SEC_SELINUX_PORTING_COMMON
-
     # Set SELinux security contexts on upgrade or policy update.
     restorecon_recursive /data
 
@@ -421,12 +393,6 @@ on post-fs-data
     restorecon -R /efs
     restorecon -R /carrier
 # ] SEC_SELINUX_PORTING_COMMON
-
-    # If there is no fs-post-data action in the init.<device>.rc file, you
-    # must uncomment this line, otherwise encrypted filesystems
-    # won't work.
-    # Set indication (checked by vold) that we have finished this action
-    #setprop vold.post_fs_data_done 1
 
 on boot
     # permissions for bluetooth.
@@ -889,7 +855,6 @@ on property:vold.decrypt=trigger_reset_main
 
 on property:vold.decrypt=trigger_load_persist_props
     load_persist_props
-    start sysmon
     start logd
     start logd-reinit
 
@@ -929,52 +894,6 @@ on property:sys.powerctl=*
 on property:sys.sysctl.extra_free_kbytes=*
     write /proc/sys/vm/extra_free_kbytes ${sys.sysctl.extra_free_kbytes}
 
-# Activate Background Compaction
-on property:sys.sysctl.compact_memory=1
-    setprop sys.sysctl.compact_memory 0
-    start compact_memory
-
-service compact_memory /sbin/bgcompact
-    user root
-    seclabel u:r:sswap:s0
-    oneshot
-    disabled
-
-## Daemon processes to be run by init.
-##
-# deferred initcall
-service sec-sh /system/bin/sh /system/etc/init.sec.boot.sh
-    class core
-    user root
-    oneshot
-
-service sysmon /system/bin/sysmon
-    class core
-    user root
-	group root readproc
-    oneshot
-
-service SIDESYNC_service /system/bin/ss_conn_daemon
-    class main
-    socket ss_conn_daemon stream 0666 system system
-    user system
-    group inet net_raw
-
-## WTL_EDM_START
-## EDM AuditLog
-service edmaudit /system/bin/edmaudit
-    class main
-    user root
-
-## WTL_EDM_END
-
-service scs /system/bin/scs
-    class main
-    user system
-    group system
-    oneshot
-    disabled
-
 # MobiCore startup
 service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin -r /system/app/mcRegistry/ffffffffd0000000000000000000001c.tlbin
     class core
@@ -986,13 +905,6 @@ service flash_recovery /system/bin/install-recovery.sh
     class main
     oneshot
 
-# [ SEC_SELINUX_PORTING_COMMON
-service auditd /system/bin/auditd -k
-    class main
-    seclabel u:r:auditd:s0
-    disabled
-    oneshot
-
 on property:selinux.sec.restorecon=1
     restorecon_data_force /data
 
@@ -1000,139 +912,6 @@ on property:selinux.sec.restorecon=1
 on property:persist.security.mdm.policy=1
     setprop selinux.reload_policy 1
 # ] SEC_SELINUX_PORTING_COMMON
-
-# bootchecker
-service bootchecker /system/bin/bootchecker
-    class late_start
-    user system
-    group system log
-    oneshot
-
-# [ Professional audio
-service apaservice /system/bin/apaservice
-	class main
-	user jack
-	group inet sdcard_rw sdcard_r media_rw shell
-
-service jackservice /system/bin/jackservice
-	class main
-	user jack
-	group audio inet shell
-# Professional audio ]
-
-# icd
-service icd /system/bin/icd
-    class main
-    user system
-    group system log
-    onrestart check_icd
-    oneshot
-
-on property:init.svc.zygote=restarting
-    restart bootchecker
-
-# strongSwan VPN
-service charon /system/bin/charon
-    class main
-    socket charon stream 600 system system
-    # charon will setuid to vpn after getting necessary resources.
-    group vpn net_admin inet shell
-    disabled
-    oneshot
-
-# ccm
-service ccm /system/bin/tlc_server CCM
-  user system
-  group system
-  disabled
-
-on property:persist.security.tlc.ccm=1
-  start ccm
-  setprop persist.security.tlc.ccm 0
-
-# dcm
-service dcm /system/bin/tlc_server DCM
-  user system
-  group system
-  disabled
-
-on property:persist.security.tlc.restartdcm=1
-  stop  dcm
-  setprop persist.security.tlc.dcm 1
-  setprop persist.security.tlc.restartdcm 0
-
-on property:persist.security.tlc.dcm=1
-  start dcm
-  setprop persist.security.tlc.dcm 0
-
-# esecomm
-  service esecomm /system/bin/tlc_server ESECOMM
-  user system
-  group system
-  disabled
-
-on property:persist.security.tlc.esecomm=1
-  start esecomm
-  setprop persist.security.tlc.esecomm 0
-
-# IO stats Deamon
-service iod /system/bin/iod
-    user system
-    group shell
-    class main
-    oneshot
-    disabled
-
-on property:sys.boot_completed=1
-    pdp result
-    start iod
-
-# icd
-on property:init.svc.media=restarting
-    check_icd
-    start icd
-
-# otp
-service otp /system/bin/otp_server
-    user system
-    group system
-    disabled
-
-on property:persist.security.tlc.otp=1
-    start otp
-    setprop persist.security.tlc.otp 0
-
-# Sensorhub service
-service sensorhubservice /system/bin/sensorhubservice
-    class main
-    user system
-    group input
-
-# SecEDS
-service TvoutService_C /system/bin/bintvoutservice
-    class main
-    user system
-    group graphics
-on property:ro.SecEDS.enable=false
-    stop TvoutService_C
-
-#preparefbe
-service preparefbe_ce /system/bin/preparefbe storage_ce
-    oneshot
-    disabled
-service preparefbe_de /system/bin/preparefbe storage_de
-    oneshot
-    disabled
-
-service vpnclientd /system/bin/vpnclientd
-    socket vpnclientd seqpacket 0600 system system
-    user system
-    group system net_admin inet net_raw
-    disabled
-on property:service.vpnclientd.enable=1
-    start vpnclientd
-on property:service.vpnclientd.enable=0
-    stop vpnclientd
 
 on property:sys.sf.restart=1
     restart surfaceflinger

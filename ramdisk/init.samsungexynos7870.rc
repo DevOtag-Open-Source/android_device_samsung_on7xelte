@@ -35,8 +35,6 @@ on init
     symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
 
 on post-fs-data
-# Log data folder
-#   mkdir /data/log 0771 radio system
 
 # Permissions for gnss
     chmod 0660 /dev/gnss_ipc
@@ -72,11 +70,6 @@ on post-fs-data
     restorecon /sys/kernel/debug/tracing/trace_marker
 
 on boot
-    # override init.rc to keep plenty of large order chunks around
-    # to improve allocation times
-#    write /proc/sys/vm/min_free_kbytes 32768
-#    write /proc/sys/vm/min_free_order_shift 1
-
 # SSWAP
     write /proc/sys/vm/swappiness 130
 
@@ -209,10 +202,6 @@ on boot
 
 #Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
-
-# sem_daemon permission
-    chown system system /efs/sec_efs/ssp_data
-    chmod 0644 /efs/sec_efs/ssp_data
 
 # permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
@@ -608,12 +597,6 @@ setprop ro.mst.support 1
     chown system system /sys/class/android_usb/android0/bDeviceClass
     chmod 0660 /sys/class/android_usb/android0/bDeviceClass
 
-# Support DM logging
-#    chmod 0770 /system/bin/dmd
-
-# Support DM logging
-    chmod 0770 /system/bin/diagexe
-
 # terminal mode
     chmod 0660 /sys/class/android_usb/android0/terminal_version
     chown system system /sys/class/android_usb/android0/terminal_version
@@ -624,16 +607,6 @@ setprop ro.mst.support 1
     chown system system /dev/ttyGS1
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
-
-# Support Virtual Com
-    chmod 0770 /system/bin/vcd
-
-# Support AP/CP log dump
-    chmod 0770 /system/bin/sced
-
-# IPSec for VOLTE
-    chown root system /dev/socket
-    chmod 0775 /dev/socket
 
 on fs
     mount_all /fstab.samsungexynos7870
@@ -773,14 +746,6 @@ on fs
     chmod 0660 /dev/radio0
     chown bluetooth bluetooth /sys/devices/bluetooth/lna_en
 
-#ARGOSD network_throughput
-    chown system system /dev/network_throughput
-# ARGOSD
-service argos-daemon /system/bin/argosd
-    class main
-    user system
-    group system radio
-
 on property:ro.bootmode=charger
     wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
     check_fs /dev/block/platform/13540000.dwmmc0/by-name/EFS ext4
@@ -789,14 +754,6 @@ on property:ro.bootmode=charger
 service charger /charger
     class charger
     seclabel u:r:healthd:s0
-
-# SecEDS
-service TvoutService_C /system/bin/bintvoutservice
-     class main
-     user system
-     group graphics
-on property:ro.SecEDS.enable=false
-    stop TvoutService_C
 
 # Bluetooth
 on property:wc_transport.start_hci=true
@@ -811,18 +768,6 @@ service start_hci_filter /system/bin/wcnss_filter
     group bluetooth qcom_diag
     disabled
 
-# MobiCore startup
-#service mobicore /system/bin/mcDriverDaemon -r /system/app/020a0000000000000000000000000000.drbin -r /system/app/mcRegistry/FFFFFFFFD00000000000000000000016.tlbin
-#    user drmrpc
-#    group drmrpc
-#    class core
-
-# RPMB daemon
-service rpmbd /system/bin/rpmbd
-     user root
-     group drmrpc
-     class main
-
 on property:sys.mobicoredaemon.enable=true
     start cs_service
     write /proc/iccc_ready 1
@@ -833,49 +778,12 @@ on property:ro.multisim.simslotcount=1
 on property:ro.multisim.simslotcount=2
     setprop persist.radio.multisim.config dsds
 
-# Modem boot daemon
-#    service cpboot-daemon /system/bin/cbd -d
-#    class main
-#    user root
-#    group radio cache inet misc audio sdcard_rw log
-
-# DM daemon
-#    service DM-daemon /system/bin/dmd
-#    class main
-#    user root
-#    group system
-
-# VC daemon
-    service VC-daemon /system/bin/vcd
-    class main
-    user root
-    group system
-
-# SCE daemon
-#    service SCE-daemon /system/bin/sced
-#    class main
-#    user root
-#    group system
-
-# diag daemon
-#    service DM-daemon /system/bin/diagexe
-#    class main
-#    user root
-#    group system
-
 service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
     class late_start
     disabled
 service fuse_usb1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb1 /storage/usb1
     class late_start
     disabled
-
-# IPSec for VOLTE
-service ipsec-daemon /system/bin/IPSecService
-    class main
-    socket ipsec_socket stream 660 system net_admin
-    user system
-    group system net_raw inet net_admin
 
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
@@ -896,25 +804,6 @@ service gpsd /system/bin/gpsd
     group system inet wakelock
     ioprio be 0
 
-# Secure Storage startup
-service secure_storage /system/bin/secure_storage_daemon
-    class core
-    user system
-    group system
-    disabled
-on property:ro.securestorage.knox=true
-    mkdir /dev/.secure_storage
-    chmod 0711 /dev/.secure_storage
-    chown system system /dev/.secure_storage
-    restorecon -R /dev/.secure_storage
-    start secure_storage
-on property:ro.securestorage.support=true
-    mkdir /dev/.secure_storage
-    chmod 0711 /dev/.secure_storage
-    chown system system /dev/.secure_storage
-    restorecon -R /dev/.secure_storage
-    start secure_storage
-
 # umount service
 service umount_service /system/bin/umount -D /preload
     disabled
@@ -934,36 +823,3 @@ service sswap /sbin/sswap -s
     user root
     group root
     oneshot
-
-# sem_daemon
-service sem_daemon /system/bin/sem_daemon
-    class core
-    user system
-    group system nfc
-    disabled
-
-on property:sys.boot_completed=1
-    setprop security.semdaemonfinish 0
-    start sem_daemon
-
-on property:security.semdaemonfinish=1
-    stop sem_daemon
-
-# WSM service startup
-service wsmd /system/bin/wsmd
-    class core
-    user system
-    group system
-    disabled
-on property:ro.wsmd.enable=true
-    mkdir /dev/socket/wsm_socket 
-    chmod 0711 /dev/socket/wsm_socket
-    chown system system /dev/socket/wsm_socket
-    start wsmd
-
-# IMS Stack
-service imsd /system/bin/imsd
-    class main
-    socket imsd stream 0660 system system
-    user root
-    group system radio net_raw inet net_admin readproc
