@@ -812,7 +812,7 @@ service gpsd /system/bin/gpsd
     ioprio be 0
 
 # SSWAP
-service sswap /sbin/sswap -s
+service sswap /system/bin/sswap -s
     class core
     user root
     group root
