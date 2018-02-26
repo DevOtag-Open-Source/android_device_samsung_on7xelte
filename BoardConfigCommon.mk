@@ -22,5 +22,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 #Hidl
 DEVICE_MANIFEST_FILE := device/samsung/exynos7870-common/manifest.xml
 
+# Properties
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+
 # Inherit splitted common board configs
 -include $(LOCAL_PATH)/board/*.mk
