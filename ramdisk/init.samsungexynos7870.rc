@@ -3,6 +3,7 @@ import init.baseband.rc
 import init.wifi.rc
 import init.rilchip.rc
 import init.samsung.rc
+import init.target.rc
 
 on early-init
     mkdir /efs 0771 radio system
