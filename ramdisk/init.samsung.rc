@@ -310,7 +310,7 @@ on post-fs-data
     mkdir /data/misc/profman 0770 system shell
 
     # MST/NFC Switch
-    chown spay system /dev/mst_ctrl
+    #chown spay system /dev/mst_ctrl
     chmod 0660 /dev/mst_ctrl
 
 	#MST Factory Test

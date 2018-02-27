@@ -651,7 +651,7 @@ on fs
     chown system system /sys/class/mdnie/mdnie/light_notification
 
 # Copy DRM Key
-    copy /system/app/wv.keys /factory/wv.keys
+    #copy /system/app/wv.keys /factory/wv.keys
 
 # Permission for DRM Key
     chmod 0644 /factory/wv.keys
