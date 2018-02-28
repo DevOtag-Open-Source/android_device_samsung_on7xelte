@@ -15,6 +15,11 @@ ro.opengles.version=196610
 lockscreen.rot_override=true
 debug.hwc.otf=1
 debug.hwc.winupdate=1
+debug.hwui.use_buffer_age=false
+debug.sf.enable_hwc_vds=1
+persist.sys.ui.hw=true
+video.accelerate.hw=1
+debug.sf.hw=1
 
 # Boot directly from charger mode
 ro.enable_boot_charger_mode=1
@@ -27,6 +32,8 @@ ro.ril.telephony.mqanelements=6
 ro.telephony.default_network=9
 ro.telephony.get_imsi_from_sim=true
 ro.ril.force_eri_from_xml=true
+persist.radio.add_power_save=1
+persist.radio.apm_sim_not_pwdn=1
 
 # read DS/SS property
 import /efs/factory.prop
