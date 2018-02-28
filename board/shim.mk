@@ -15,4 +15,4 @@
 
 # Shim
 TARGET_LD_SHIM_LIBS += \
-    /system/lib/libexynoscamera.so|/system/vendor/lib/libcamhelpr.so
+    /system/lib/libexynoscamera.so|/vendor/lib/libcamhelpr.so
