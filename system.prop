@@ -29,11 +29,13 @@ persist.radio.sib16_support=0
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 ro.ril.telephony.mqanelements=6
-ro.telephony.default_network=9
+ro.telephony.default_network=22
 ro.telephony.get_imsi_from_sim=true
 ro.ril.force_eri_from_xml=true
 persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
+persist.data.netmgrd.qos.enable=false
+ro.use_data_netmgrd=false
 
 # read DS/SS property
 import /efs/factory.prop
