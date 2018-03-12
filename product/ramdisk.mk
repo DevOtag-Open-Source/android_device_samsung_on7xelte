@@ -20,6 +20,7 @@ PRODUCT_PACKAGES += \
     init.rilchip.rc \
     init.samsung.rc \
     init.services.rc \
+    init.power.rc \
     init.samsungexynos7870.rc \
     init.samsungexynos7870.usb.rc \
     ueventd.samsungexynos7870.rc
