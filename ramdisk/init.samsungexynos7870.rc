@@ -12,7 +12,6 @@ on early-init
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
     # Support legacy paths
@@ -54,7 +53,6 @@ on post-fs-data
     chmod 0600 /efs/factory.prop
 	
 on boot
-
     # 1-key hard reset
     chown system system /sys/power/reset_enabled
     chmod 0660 /sys/power/reset_enabled
