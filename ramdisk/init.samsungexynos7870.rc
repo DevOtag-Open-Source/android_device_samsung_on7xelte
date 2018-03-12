@@ -161,6 +161,15 @@ on boot
 
 on fs
     mount_all /fstab.samsungexynos7870 --early
+
+on late-fs
+    # Start HW service manager early
+    start hwservicemanager
+
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+
     setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
 
@@ -169,13 +178,6 @@ on fs
     mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/CPEFS /cpefs noatime nosuid nodev barrier=1
     chown radio system /cpefs
     chmod 0771 /cpefs
-
-    # Start HW service manager early
-    start hwservicemanager
-
-    # Start services for bootanim
-    start surfaceflinger
-    start bootanim
 
     # Mount RW partitions which need run fsck
     mount_all /fstab.samsungexynos7870 --late
