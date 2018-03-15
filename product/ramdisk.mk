@@ -19,7 +19,7 @@ PRODUCT_PACKAGES += \
     init.baseband.rc \
     init.rilchip.rc \
     init.samsung.rc \
-    init.services.rc \
+    init.service.rc \
     init.power.rc \
     init.samsungexynos7870.rc \
     init.samsungexynos7870.usb.rc \

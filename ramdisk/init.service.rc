@@ -45,7 +45,6 @@ on charger
     class_start charger
 
 on nonencrypted
-    # mobicore
     mkdir /data/misc/mcRegistry 0775 system system
 
 on property:vold.decrypt=trigger_restart_framework
