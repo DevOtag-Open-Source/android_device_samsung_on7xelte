@@ -40,7 +40,10 @@ ro.use_data_netmgrd=false
 # read DS/SS property
 import /efs/factory.prop
 
-#Treble
+# Load omx blobs
+media.stagefright.legacyencoder=1
+media.stagefright.less-secure=1
+sys.use_fifo_ui=1
 persist.media.treble_omx=false
 
 # Wifi
