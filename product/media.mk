@@ -25,3 +25,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libion \
     libfimg
+
+# Omx Shims
+PRODUCT_PACKAGES  += \
+    libui_shim \
+    libExynosOMX_shim
+
+# Overriden service definition
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init/android.hardware.media.omx@1.0-service.rc:system/vendor/etc/init/android.hardware.media.omx@1.0-service.rc
