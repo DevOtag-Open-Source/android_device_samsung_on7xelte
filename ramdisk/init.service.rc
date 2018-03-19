@@ -53,7 +53,7 @@ service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.
     class core
     user root
     group root
-    seclabel u:r:prepare_param:s0
+#    seclabel u:r:prepare_param:s0
     oneshot
 
 service gpsd /system/bin/gpsd
