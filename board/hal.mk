@@ -16,4 +16,3 @@
 # Samsung HALs to be built from hardware/samsung
 TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
-TARGET_SEC_FP_HAL_VARIANT := bauth
