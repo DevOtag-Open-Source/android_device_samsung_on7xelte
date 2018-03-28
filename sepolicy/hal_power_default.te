@@ -1,0 +1,4 @@
+allow hal_power_default self:capability dac_override;
+allow hal_power_default sysfs:file { open write };
+allow hal_power_default sysfs_devices_system_cpu:file write;
+
