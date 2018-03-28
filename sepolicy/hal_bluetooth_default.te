@@ -1,1 +1,0 @@
-allow hal_bluetooth_default device:chr_file { ioctl open read write };
