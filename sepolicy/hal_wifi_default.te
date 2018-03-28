@@ -1,0 +1,5 @@
+allow hal_wifi_default sysfs:file write;
+allow hal_wifi_default system_data_file:file { open read write };
+allow hal_wifi_default wifi_efs_file:dir search;
+allow hal_wifi_default wifi_efs_file:file { open read };
+
