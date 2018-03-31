@@ -38,6 +38,9 @@ persist.radio.apm_sim_not_pwdn=1
 # read DS/SS property
 import /efs/factory.prop
 
+# OEM Unlocking
+ro.oem_unlock_supported=1
+
 # Load omx blobs
 media.stagefright.legacyencoder=1
 media.stagefright.less-secure=1
