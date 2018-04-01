@@ -27,7 +27,7 @@ on property:persist.sys.cpboot=disable
     stop cpboot-daemon
 
 on property:ro.multisim.simslotcount=2
-    start ril-daemon1
+    enable ril-daemon1
 
 on early-boot
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
