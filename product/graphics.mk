@@ -19,7 +19,6 @@ PRODUCT_AAPT_CONFIG := normal
 
 # Graphics
 PRODUCT_PACKAGES += \
-    libfimg \
     libhwc2on1adapter \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
