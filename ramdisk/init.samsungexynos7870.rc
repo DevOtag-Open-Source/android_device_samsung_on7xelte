@@ -16,9 +16,6 @@ on init
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
 
-    symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
-    symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
-
     # Storage views to support runtime permissions
     mkdir /storage 0755 root root
 
