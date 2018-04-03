@@ -23,3 +23,5 @@ allow gpsd gps_data_file:file { create rw_file_perms };
 allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
 
 allow gpsd sysfs_wake_lock:file rw_file_perms;
+
+allow gpsd sysfs:file { open read };

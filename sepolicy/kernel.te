@@ -12,3 +12,6 @@ allow kernel { app_efs_file battery_efs_file efs_file sensor_efs_file }:file rw_
 
 allow kernel sysfs_sec:dir search;
 allow kernel sysfs_sec:lnk_file read;
+
+allow kernel device:blk_file { create setattr };
+allow kernel self:capability mknod;
