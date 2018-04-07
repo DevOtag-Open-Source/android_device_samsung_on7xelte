@@ -39,6 +39,9 @@ allow rild radio_data_file:file create_file_perms;
 set_prop(modemloader, radio_prop)
 
 allow rild sec_efs_file:file getattr;
+allow rild sec_efs_file:dir search;
 allow rild sysfs:dir write;
 allow rild sysfs_sec:dir search;
 allow rild sysfs_sec:lnk_file read;
+
+allow rild radio_block_device:blk_file read;
