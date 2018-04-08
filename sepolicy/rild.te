@@ -44,4 +44,4 @@ allow rild sysfs:dir write;
 allow rild sysfs_sec:dir search;
 allow rild sysfs_sec:lnk_file read;
 
-allow rild radio_block_device:blk_file read;
+allow rild radio_block_device:blk_file { open read };

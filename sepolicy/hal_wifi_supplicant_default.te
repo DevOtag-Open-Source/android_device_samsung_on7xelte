@@ -1,2 +1,2 @@
-allow hal_wifi_supplicant_default rfkill_device:chr_file read;
+allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };
 

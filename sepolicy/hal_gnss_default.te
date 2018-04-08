@@ -1,0 +1,4 @@
+allow hal_gnss_default gps_data_file:file getattr;
+allow hal_gnss_default vndbinder_device:chr_file { ioctl open read write };
+allow hal_gnss_default gpsd:unix_stream_socket connectto;
+
