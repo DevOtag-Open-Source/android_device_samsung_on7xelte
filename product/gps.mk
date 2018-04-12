@@ -15,9 +15,8 @@
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps/gps.cfg:system/vendor/etc/gps.cfg \
-    $(LOCAL_PATH)/configs/gps/gps.conf:system/vendor/etc/gps.conf
+    $(LOCAL_PATH)/configs/gps/gps.cfg:system/vendor/etc/gnss/gps.cfg \
+    $(LOCAL_PATH)/configs/gps/gps_debug.conf:system/etc/gps_debug.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service
+    android.hardware.gnss@1.0-impl
