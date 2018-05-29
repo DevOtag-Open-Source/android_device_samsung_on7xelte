@@ -38,10 +38,6 @@ import /efs/factory.prop
 # OEM Unlocking
 ro.oem_unlock_supported=1
 
-# Load omx blobs
-media.stagefright.legacyencoder=1
-media.stagefright.less-secure=1
-sys.use_fifo_ui=1
 persist.media.treble_omx=false
 
 # Wifi
