@@ -13,7 +13,6 @@ lockscreen.rot_override=true
 debug.hwc.otf=1
 debug.hwc.winupdate=1
 debug.hwui.use_buffer_age=false
-debug.sf.enable_hwc_vds=1
 persist.sys.ui.hw=true
 video.accelerate.hw=1
 debug.sf.hw=1
