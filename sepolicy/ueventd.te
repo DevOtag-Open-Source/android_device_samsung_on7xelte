@@ -1,8 +1,11 @@
+# /dev/block/mmcblk0p[0-9]
+#allow ueventd emmcblk_device:blk_file create_file_perms;
+
+allow ueventd emmcblk_device:blk_file { relabelfrom relabelto create setattr unlink getattr };
+
 # read/chown camera firmware
 allow ueventd sysfs_camera_writable:file { relabelto getattr rw_file_perms };
 allow ueventd sysfs_camera_writable:filesystem associate;
 
-
-allow ueventd emmcblk_device:blk_file { create getattr setattr };
 allow ueventd sysfs_sec:dir { open read relabelto search };
 allow ueventd sysfs_sec:lnk_file relabelto;

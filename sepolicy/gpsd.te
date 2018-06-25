@@ -17,6 +17,7 @@ binder_call(gpsd, system_server)
 binder_use(gpsd)
 
 # /dev/ttySAC0
+allow gpsd bluetooth_device:chr_file { getattr setattr rw_file_perms };
 allow gpsd gps_device:chr_file { getattr setattr rw_file_perms };
 allow gpsd gps_data_file:dir { search write add_name remove_name };
 allow gpsd gps_data_file:file { create rw_file_perms };
@@ -31,7 +32,6 @@ allow gpsd fwmarkd_socket:sock_file write;
 allow gpsd netd:unix_stream_socket connectto;
 allow gpsd self:udp_socket { connect create read setopt write };
 
-allow gpsd mif_device:chr_file { ioctl open read };
+allow gpsd mif_device:chr_file r_file_perms;
 allow gpsd shell_exec:file { execute execute_no_trans getattr open read };
 allow gpsd toolbox_exec:file { execute execute_no_trans getattr open read };
-

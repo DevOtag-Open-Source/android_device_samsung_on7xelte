@@ -10,6 +10,12 @@ allow init emmcblk_device:blk_file rw_file_perms;
 allow init block_device:lnk_file { setattr };
 allow init tmpfs:lnk_file create_file_perms;
 
+# /sys/class/power_supply/battery and /sys/class/android_usb/android0
+allow init sysfs:dir w_dir_perms;
+
+# required for LD_SHIM_LIBS
+allow init { domain -lmkd -crash_dump }:process noatsecure;
+
 # /data
 allow init sdcardd_exec:file r_file_perms;
 

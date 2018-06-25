@@ -1,1 +1,5 @@
-allow bluetooth bluetooth_device:chr_file rw_file_perms;
+# /dev/ttySAC0
+allow bluetooth bluetooth_device:chr_file { rw_file_perms ioctl };
+
+# /data/.cid.info
+allow bluetooth wifi_data_file:file r_file_perms;
