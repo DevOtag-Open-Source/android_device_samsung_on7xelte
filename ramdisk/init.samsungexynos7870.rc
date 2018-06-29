@@ -492,10 +492,3 @@ service gpsd /system/bin/gpsd
 service charger /charger
     class charger
     seclabel u:r:healthd:s0
-
-service cameraserver /system/bin/cameraserver
-    class main
-    user cameraserver
-    group media_rw audio camera drmrpc inet shell sdcard_r system
-    ioprio rt 4
-    writepid /dev/cpuset/foreground/tasks
