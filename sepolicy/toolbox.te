@@ -1,0 +1,6 @@
+allow toolbox block_device:dir { add_name write };
+allow toolbox block_device:lnk_file create;
+allow toolbox emmcblk_device:blk_file setattr;
+allow toolbox self:capability { chown fowner fsetid };
+allow toolbox sysfs:file getattr;
+allow toolbox sysfs_devices_system_cpu:file setattr;

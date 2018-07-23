@@ -32,3 +32,6 @@ allow init sysfs_camera_writable:filesystem associate;
 allow init socket_device:sock_file { unlink create setattr };
 
 allow init sysfs_sec:lnk_file read;
+
+allow init block_device:blk_file write;
+allow init property_socket:sock_file write;
