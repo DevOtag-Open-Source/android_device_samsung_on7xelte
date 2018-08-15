@@ -32,3 +32,6 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 -
 # Device Tree Blobs
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
+
+# Kernel Path
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
