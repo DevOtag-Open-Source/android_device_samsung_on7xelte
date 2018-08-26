@@ -83,13 +83,13 @@
         <item>9</item>
     </integer-array>
 
+    <!-- Configure mobile tcp buffer sizes in the form:
+         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
+         If no value is found for the rat-name in use, the system default will be applied.
+    -->
     <string-array name="config_mobile_tcp_buffers">
         <item>lte:1048576,3145728,4194304,1048576,3145728,4194304</item>
     </string-array>
-
-    <!-- ############################################################## -->
-    <!-- ### DISPLAY                                                    -->
-    <!-- ############################################################## -->
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
@@ -98,40 +98,36 @@
          turned off and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOff">true</bool>
 
-    <!-- Permit doze mode to operate -->
-    <bool name="config_enableAutoPowerModes">true</bool>
-
     <!-- If supported, are dreams(screen saver) enabled? (by default) -->
     <bool name="config_dreamsEnabledByDefault">false</bool>
 
-    <!-- Power Management: Specifies whether to decouple the interactive state of the
-         device from the display on/off state. -->
-    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
-
-    <!-- Allow screen mirroring/miracast -->
+    <!-- Whether WiFi display is supported by this device.
+         There are many prerequisites for this feature to work correctly.
+         Here are a few of them:
+         * The WiFi radio must support WiFi P2P.
+         * The WiFi radio must support concurrent connections to the WiFi display and
+           to an access point.
+         * The Audio Flinger audio_policy.conf file must specify a rule for the "r_submix"
+           remote submix module.  This module is used to record and stream system
+           audio output to the WiFi display encoder in the media server.
+         * The remote submix module "audio.r_submix.default" must be installed on the device.
+         * The device must be provisioned with HDCP keys (for protected content).
+    -->
     <bool name="config_enableWifiDisplay">true</bool>
 
-    <!-- The device supports freeform window management -->
+    <!-- The device supports freeform window management. Windows have title bars and can be moved
+         and resized. If you set this to true, you also need to add
+         PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT feature to your device specification.
+         The duplication is necessary, because this information is used before the features are
+         available to the system.-->
     <bool name="config_freeformWindowManagement">true</bool>
 
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
 
-    <!-- Number of milliseconds to hold a wake lock to ensure that drawing is fully
-         flushed to the display while dozing.  This value needs to be large enough
-         to account for processing and rendering time plus a frame or two of latency
-         in the display pipeline plus some slack just to be sure. -->
-    <integer name="config_drawLockTimeoutMillis">150</integer>
-
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
-
-    <!-- Whether UI for multi user should be shown -->
-    <bool name="config_enableMultiUserUI">true</bool>
-
-    <!-- Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">4</integer>
 
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
@@ -150,10 +146,6 @@
 
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
     <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
-
-    <!-- Control whether Night display is available. This should only be enabled on devices
-         with HWC 2.0 or higher. -->
-    <bool name="config_nightDisplayAvailable">true</bool>
 
     <!-- Values for GPS configuration -->
     <string-array translatable="false" name="config_gpsParameters">
