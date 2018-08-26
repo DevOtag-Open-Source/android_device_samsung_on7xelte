@@ -14,9 +14,5 @@
     {
         "repository": "android_hardware_samsung_slsi-cm_openmax",
         "target_path": "hardware/samsung_slsi-cm/openmax"
-    },
-    {
-	     "repository": "android_packages_apps_SamsungServiceMode",
-	     "target_path": "packages/apps/SamsungServiceMode"
     }
 ]
