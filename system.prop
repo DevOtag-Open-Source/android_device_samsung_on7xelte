@@ -33,9 +33,6 @@ telephony.lteOnCdmaDevice=0
 # read DS/SS property
 import /efs/factory.prop
 
-# OEM Unlocking
-ro.oem_unlock_supported=1
-
 persist.media.treble_omx=false
 
 # Wifi
