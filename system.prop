@@ -13,6 +13,7 @@ debug.hwui.use_buffer_age=false
 persist.sys.ui.hw=true
 video.accelerate.hw=1
 debug.sf.hw=1
+ro.sf.disable_triple_buffer=0
 
 # Boot directly from charger mode
 ro.enable_boot_charger_mode=1
