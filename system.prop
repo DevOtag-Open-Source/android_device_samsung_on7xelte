@@ -33,6 +33,9 @@ telephony.lteOnCdmaDevice=0
 # read DS/SS property
 import /efs/factory.prop
 
+# Sdcardfs
+ro.sys.sdcardfs=true
+
 persist.media.treble_omx=false
 
 # Wifi
