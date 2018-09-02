@@ -13,5 +13,5 @@
 # limitations under the License.
 #
 
-# Samsung Hardware
-BOARD_HARDWARE_CLASS := device/samsung/exynos7870-common/lineagehw
+# Lineage HW
+JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/samsung/exynos7870-common/lineagehw|**/*.java
