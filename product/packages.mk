@@ -17,10 +17,6 @@
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
-# Remove unwanted packages
-PRODUCT_PACKAGES += \
-    RemovePackages
-
 # Skeletons
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0
