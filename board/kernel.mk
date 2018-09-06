@@ -13,6 +13,8 @@
 # limitations under the License.
 #
 
+BUILD_TOP := $(shell pwd)
+
 # Extracted with libbootimg
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_IMAGE_NAME := Image
@@ -22,7 +24,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
+KERNEL_TOOLCHAIN := $(BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
 BOARD_KERNEL_IMAGE_NAME := Image
 
 # Custom mkbootimg from hardware/samsung
