@@ -7,7 +7,7 @@ init_daemon_domain(cpboot-daemon)
 wakelock_use(cpboot-daemon)
 #unix_socket_connect(cpboot-daemon, property, init)
 
-allow cpboot-daemon self:capability { dac_override setuid setgid };
+allow cpboot-daemon self:capability { setuid setgid };
 
 # FIXME neverallow rule
 # allow cpboot-daemon self:capability mknod;

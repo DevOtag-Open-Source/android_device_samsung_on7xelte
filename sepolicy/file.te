@@ -11,13 +11,13 @@ type wifi_efs_file, file_type;
 type sensor_efs_file, file_type;
 
 # general types
-type mobicore_data_file, file_type;
-type gps_data_file, file_type, data_file_type;
+type mobicore_data_file, file_type, data_file_type, core_data_file_type;
+type gps_data_file, file_type, data_file_type, core_data_file_type;
 type sysfs_writable, fs_type, sysfs_type, mlstrustedobject;
 
 # sysfs types
 type sysfs_mdnie_writable, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_sec, fs_type, fs_type, fs_type, mlstrustedobject;
+type sysfs_sec, fs_type, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_camera_writable, fs_type, sysfs_type, mlstrustedobject;
 
 allow sysfs_type tmpfs:filesystem associate;
