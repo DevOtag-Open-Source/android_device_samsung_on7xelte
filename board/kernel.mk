@@ -26,6 +26,7 @@ TARGET_KERNEL_HEADER_ARCH := arm
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 KERNEL_TOOLCHAIN := $(BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
 BOARD_KERNEL_IMAGE_NAME := Image
+TARGET_LINUX_KERNEL_VERSION := 3.18
 
 # Custom mkbootimg from hardware/samsung
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
