@@ -23,5 +23,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 -include $(LOCAL_PATH)/product/*.mk
 
 # Call Samsung LSI Board Support Package
+ifneq ($(INCLUDE_EXYNOS_BSP),)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos7870/exynos7870.mk)
+endif
