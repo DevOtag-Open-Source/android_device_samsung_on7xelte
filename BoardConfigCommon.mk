@@ -19,6 +19,9 @@ LOCAL_PATH := device/samsung/exynos7870-common
 # Include headers
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/exynos7870-common/include
 
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/bin/mediaserver=24
+    
 # SELinux
 BOARD_SEPOLICY_DIRS += device/samsung/exynos7870-common/sepolicy
 
