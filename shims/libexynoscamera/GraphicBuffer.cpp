@@ -16,8 +16,6 @@
 
 #include <ui/GraphicBuffer.h>
 
-extern "C" void _ZN7android5FenceD1Ev() { }
-
 extern "C" void _ZN7android13GraphicBufferC1EjjijjjP13native_handleb(
         const native_handle_t* handle,
         android::GraphicBuffer::HandleWrapMethod method,
