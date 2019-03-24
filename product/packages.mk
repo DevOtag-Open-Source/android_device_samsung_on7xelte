@@ -20,7 +20,3 @@ PRODUCT_PACKAGES += \
 # Skeletons
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0
-    
-# Camera App
-PRODUCT_PACKAGES += \
-	Camera2
