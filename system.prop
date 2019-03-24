@@ -32,8 +32,6 @@ import /efs/factory.prop
 # Sdcardfs
 ro.sys.sdcardfs=true
 
-persist.media.treble_omx=false
-
 # Wifi
 wifi.interface=wlan0
 
