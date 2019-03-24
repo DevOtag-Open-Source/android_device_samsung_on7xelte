@@ -1,6 +1,9 @@
 # /dev/mbin0
 allow system_server emmcblk_device:dir search;
 
+# thermal service
+allow system_server thermal_service:service_manager find;
+
 # /efs
 allow system_server efs_file:dir r_dir_perms;
 
@@ -49,3 +52,5 @@ allow system_server sysfs_sec:dir search;
 allow system_server sysfs_sec:lnk_file read;
 allow system_server crash_dump:process getpgid;
 allow system_server unlabeled:dir write;
+
+allow system_server device:chr_file { open read ioctl };

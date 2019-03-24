@@ -1,6 +1,8 @@
 # Mount debugfs on /sys/kernel/debug.
 allow init debugfs:dir mounton;
 
+allow init init:capability sys_module;
+
 # Mount EFS on /efs
 allow init efs_file:dir  mounton;
 
@@ -12,6 +14,7 @@ allow init tmpfs:lnk_file create_file_perms;
 
 # /sys/class/power_supply/battery and /sys/class/android_usb/android0
 allow init sysfs:dir r_dir_perms;
+allow init sysfs:file { open write setattr };
 
 # required for LD_SHIM_LIBS
 allow init { domain -lmkd -crash_dump }:process noatsecure;
@@ -24,6 +27,7 @@ allow init sysfs:lnk_file setattr;
 
 # read/chown mDNIE symlinks
 allow init sysfs_mdnie_writable:lnk_file { read setattr };
+allow init sysfs_mdnie_writable:file setattr;
 
 # read/chown camera firmware
 allow init sysfs_camera_writable:file { relabelto setattr };
@@ -35,3 +39,11 @@ allow init sysfs_sec:lnk_file read;
 
 allow init block_device:blk_file write;
 allow init property_socket:sock_file write;
+
+allow init bluetooth_device:chr_file { write ioctl };
+allow init sysfs_bluetooth_writable:file setattr;
+allow init system_file:file execute_no_trans;
+allow init proc:file setattr;
+allow init sysfs_devices_system_cpu:file write;
+allow init input_device:chr_file ioctl;
+allow init tee_device:chr_file { write ioctl getattr };

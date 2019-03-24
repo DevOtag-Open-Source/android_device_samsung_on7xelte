@@ -52,9 +52,12 @@ set_prop(modemloader, radio_prop)
 
 allow rild sec_efs_file:file getattr;
 allow rild sec_efs_file:dir search;
-allow rild sysfs:dir r_dir_perms;
+allow rild sysfs:dir { r_dir_perms write };
 allow rild sysfs_sec:dir search;
 allow rild sysfs_sec:lnk_file read;
 
 # /dev/knox_kap
 allow rild knox_device:chr_file r_file_perms;
+
+allow rild system_data_file:file { getattr read open };
+allow rild proc_qtaguid_stat:file { open read getattr };

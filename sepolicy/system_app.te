@@ -1,3 +1,6 @@
 allow system_app sysfs_mdnie_writable:{ file lnk_file } rw_file_perms;
 allow system_app sysfs_mdnie_writable:dir search;
 allow system_app wificond:binder call;
+allow system_app storage_stub_file:file getattr;
+allow system_app proc_pagetypeinfo:file { open read };
+allow system_app bootloader_boot_reason_prop:file  read;

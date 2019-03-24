@@ -1,4 +1,6 @@
-allow netd self:capability sys_module;
+allow netd self:capability { sys_module fsetid };
 
 allow netd gpsd:fd use;
 allow netd gpsd:udp_socket { getopt read setopt write };
+
+allow netd sysfs:file { open write };

@@ -3,3 +3,5 @@ allow hal_drm_default vndbinder_device:chr_file { ioctl open read write };
 allow hal_drm_default secmem_device:chr_file { read write open getattr ioctl };
 allow hal_drm_default efs_file:dir search;
 allow hal_drm_default cpk_efs_file:file { open read getattr };
+
+allow hal_drm_default media_data_file:file { read write };
