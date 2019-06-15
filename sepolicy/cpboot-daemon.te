@@ -9,8 +9,6 @@ wakelock_use(cpboot-daemon)
 
 allow cpboot-daemon self:capability { setuid setgid };
 
-allow cpboot-daemon cpboot-daemon:capability dac_override;
-
 # FIXME neverallow rule
 # allow cpboot-daemon self:capability mknod;
 allow cpboot-daemon kernel:system syslog_read;
@@ -43,7 +41,6 @@ allow cpboot-daemon sysfs:file r_file_perms;
 
 # /proc/cmdline
 allow cpboot-daemon proc:file r_file_perms;
-allow cpboot-daemon proc_cmdline:file read;
 
 # set properties on boot
 set_prop(cpboot-daemon, cpboot-daemon_prop)
