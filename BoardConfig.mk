@@ -168,6 +168,9 @@ TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
 # Lineage HW
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/samsung/on7xelte/lineagehw|**/*.java
 
+# Manifest
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+
 # Partition Sizes
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 39845888

@@ -123,10 +123,6 @@ PRODUCT_PACKAGES += \
     lights.universal7870 \
     android.hardware.light@2.0-impl
 
-# Manifest
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
-
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/vendor/etc/media_codecs_google_audio.xml \
