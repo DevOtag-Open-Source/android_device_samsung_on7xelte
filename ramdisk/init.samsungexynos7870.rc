@@ -381,7 +381,7 @@ on boot
     chown system system /sys/class/sec/sddata/sd_data
     chmod 444 /sys/class/sec/sddata/sd_data
 on fs
-    mount_all /fstab.samsungexynos7870 --early
+    mount_all /vendor/etc/fstab.samsungexynos7870 --early
 
 on late-fs
     # Start HW service manager early
@@ -400,7 +400,7 @@ on late-fs
     chmod 0771 /cpefs
 
     # Mount RW partitions which need run fsck
-    mount_all /fstab.samsungexynos7870 --late
+    mount_all /vendor/etc/fstab.samsungexynos7870 --late
 
     # Permissions for ION
     chmod 0660 /sys/class/ion_cma/ion_video_ext/isolated
