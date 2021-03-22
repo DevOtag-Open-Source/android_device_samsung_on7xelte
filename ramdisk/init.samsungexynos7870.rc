@@ -1,9 +1,9 @@
-import init.samsungexynos7870.usb.rc
-import init.baseband.rc
-import init.wifi.rc
-import init.rilchip.rc
-import init.target.rc
-import init.power.rc
+import /vendor/etc/init/hw/init.samsungexynos7870.usb.rc
+import /vendor/etc/init/hw/init.baseband.rc
+import /vendor/etc/init/hw/init.wifi.rc
+import /vendor/etc/init/hw/init.rilchip.rc
+import /vendor/etc/init/hw/init.target.rc
+import /vendor/etc/init/hw/init.power.rc
 
 on early-init
     mkdir /efs 0771 radio system
