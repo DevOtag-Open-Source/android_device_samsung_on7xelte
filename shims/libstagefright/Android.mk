@@ -20,6 +20,9 @@ LOCAL_SRC_FILES := CameraSource.cpp
 
 LOCAL_C_INCLUDES := \
     $(TOP)/frameworks/av/include \
+    $(TOP)/frameworks/av/media/libstagefright/include \
+    $(TOP)/frameworks/av/media/libstagefright/foundation/include \
+    $(TOP)/frameworks/av/media/ndk/include \
     $(TOP)/frameworks/native/include/media/hardware \
     $(TOP)/frameworks/native/include/media/openmax \
     $(TOP)/frameworks/native/libs/arect/include \
