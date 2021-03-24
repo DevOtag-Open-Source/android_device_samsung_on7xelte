@@ -169,6 +169,7 @@ TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/samsung/on7xelte/lineagehw|**/*.java
 
 # Manifest
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 
 # Partition Sizes
