@@ -45,7 +45,7 @@ ro.smps.enable=true
 telephony.lteOnCdmaDevice=0
 
 # read DS/SS property
-import /efs/factory.prop
+import /efs/factory.prop *
 
 # ro.product.first_api_level indicates the first api level the device has commercially launched on.
 ro.product.first_api_level=23
