@@ -209,6 +209,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.samsungexynos7870 \
     init.baseband.rc \
+    init.logger.rc \
     init.power.rc \
     init.rilchip.rc \
     init.samsungexynos7870.rc \

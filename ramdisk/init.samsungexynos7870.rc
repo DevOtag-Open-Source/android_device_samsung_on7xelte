@@ -4,6 +4,7 @@ import /vendor/etc/init/hw/init.wifi.rc
 import /vendor/etc/init/hw/init.rilchip.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.power.rc
+import /vendor/etc/init/hw/init.logger.rc
 
 on early-init
     mkdir /efs 0771 radio system
