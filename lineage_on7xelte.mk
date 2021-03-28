@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,5 +14,18 @@
 # limitations under the License.
 #
 
-key 158 BACK
-key 254 APP_SWITCH
+# Inherit device configuration
+$(call inherit-product, device/samsung/on7xelte/device.mk)
+
+# Inherit from those products. Most specific first
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Inherit some common Lineage stuff
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+
+# Device identifier
+PRODUCT_NAME := lineage_on7xelte
+PRODUCT_DEVICE := on7xelte
+PRODUCT_BRAND := samsung
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_GMS_CLIENTID_BASE := android-samsung

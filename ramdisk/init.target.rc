@@ -1,0 +1,132 @@
+on post-fs-data
+    # Mobicore
+    export MC_AUTH_TOKEN_PATH /efs
+    mkdir /efs/TEE  0770 radio system
+    chmod 0660 /dev/t-base-tui
+    chown system system /dev/t-base-tui
+    start mobicore
+
+    mkdir /data/biometrics 0700 system system
+    restorecon_recursive /data/biometrics
+
+on post-fs
+    # Mobicore
+    setprop sys.mobicoredaemon.enable stopped
+
+on boot
+# Permissions for Accelerometer_sensor
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
+    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
+    chown system radio /sys/class/sensors/accelerometer_sensor/lowpassfilter
+    chown system radio /sys/class/sensors/accelerometer_sensor/dhr_sensor_info
+    chown system system /efs/calibration_data
+    chmod 0666 /efs/calibration_data
+
+# Permissions for Bluetooth.
+    setprop ro.bt.bdaddr_path /efs/bluetooth/bt_addr
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown radio bluetooth /efs/bluetooth/bt_addr
+    chmod 0640 /efs/bluetooth/bt_addr
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/device/extldo
+
+    chown bluetooth net_bt /dev/ttySAC0
+    chmod 0660 /dev/ttySAC0
+
+# Permissions for Camera
+    mkdir /data/camera 0770 media system
+    chown system radio /sys/class/camera/rear/rear_camfw
+    chown system radio /sys/class/camera/rear/rear_camfw_full
+    chown system radio /sys/class/camera/rear/rear_checkfw_user
+    chown system radio /sys/class/camera/rear/rear_checkfw_factory
+    chown system radio /sys/class/camera/rear/rear_sensor_standby
+    chown system radio /sys/class/camera/rear/rear_camtype
+    chown system radio /sys/class/camera/rear/rear_calcheck
+    chown system radio /sys/class/camera/rear/rear_caminfo
+    chown system radio /sys/class/camera/rear/rear_sensorid
+    chown system radio /sys/class/camera/rear/rear_moduleid
+    chown system radio /sys/class/camera/flash/front_flash
+    chown system radio /sys/class/camera/front/front_camfw
+    chown system radio /sys/class/camera/front/front_camfw_full
+    chown system radio /sys/class/camera/front/front_checkfw_factory
+    chown system radio /sys/class/camera/front/front_camtype
+    chown system radio /sys/class/camera/front/front_caminfo
+    chown system radio /sys/class/camera/front/front_sensorid
+
+# Permissions for Fingerprint_sensor
+    chown system radio /sys/class/fingerprint/fingerprint/type_check
+    chown system radio /sys/class/fingerprint/fingerprint/name
+    chown system radio /sys/class/fingerprint/fingerprint/vendor
+    chown system radio /sys/class/fingerprint/fingerprint/adm
+
+    chown system system /dev/esfp0
+    chmod 0660 /dev/esfp0
+
+# Permissions for LCD
+    chown system radio /sys/class/lcd/panel/lcd_type
+    chown system system /sys/class/lcd/panel/lux
+
+# Permissions for Proximity_sensor
+    chown system radio /sys/class/sensors/proximity_sensor/raw_data
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
+    chown system radio /sys/class/sensors/proximity_sensor/vendor
+    chown system radio /sys/class/sensors/proximity_sensor/name
+    chown system radio /sys/class/sensors/proximity_sensor/prox_trim
+    chown system radio /sys/class/sensors/proximity_sensor/prox_offset_pass
+
+# Permissions for SVC LED
+    chown system system /sys/class/sec/led/led_blink
+    chown system system /sys/class/sec/led/led_r
+    chown system system /sys/class/sec/led/led_g
+    chown system system /sys/class/sec/led/led_b
+    chown system system /sys/class/sec/led/led_lowpower
+    chown system system /sys/class/sec/led/led_pattern
+
+# Permissions for TouchScreen
+    chown system radio /sys/class/sec/tsp/cmd
+    chown system system /sys/class/sec/tsp/input/enabled
+
+    chmod 0660 /sys/class/sec/tsp/input/enabled
+
+# Permissions for Touchkey
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
+    chown system system /sys/class/sec/sec_touchkey/input/enabled
+
+    chmod 0660 /sys/class/sec_touchkey/input/enabled
+
+# Permission for Vibrator
+    chown system system /sys/class/timed_output/vibrator/enable
+
+# Permission for Wifi firmware_path
+    chown wifi wifi /sys/module/dhd/parameters/firmware_path
+
+# Permission for Mobicore
+    chown radio system /dev/mobicore-user
+    chown system system /dev/mobicore
+    chown media system /dev/s5p-smem
+
+    chmod 0666 /dev/mobicore-user
+    chmod 0700 /dev/mobicore
+    chmod 0660 /dev/s5p-smem
+
+on nonencrypted
+    mkdir /data/misc/mcRegistry 0775 system system
+
+on property:vold.decrypt=trigger_restart_framework
+    mkdir /data/misc/mcRegistry 0775 system system
+
+service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin
+    class core
+    user system
+    group system
+    disabled

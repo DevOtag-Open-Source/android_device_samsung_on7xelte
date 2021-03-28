@@ -1,0 +1,13 @@
+allow hal_fingerprint_default device:chr_file getattr;
+allow hal_fingerprint_default fingerprintd_data_file:dir { create rmdir search };
+allow hal_fingerprint_default tee_device:chr_file { read write open getattr ioctl };
+
+allow hal_fingerprint_default system_data_file:dir { add_name create open read remove_name rmdir write };
+allow hal_fingerprint_default system_data_file:file { getattr open read };
+
+allow hal_fingerprint_default fingerprint_device:chr_file { read write open getattr ioctl };
+
+allow hal_fingerprint_default tee:unix_stream_socket connectto;
+
+allow hal_fingerprint_default fingerprint_data_file:file { unlink write create rename open getattr read };
+allow hal_fingerprint_default fingerprint_data_file:dir { create rmdir search write rename add_name open read remove_name};

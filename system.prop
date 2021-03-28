@@ -1,6 +1,18 @@
 # Audio
 af.fast_track_multiplier=1
 ro.config.vc_call_vol_steps=15
+audio_hal.disable_two_mic=true
+
+# Dalvik Heap
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=288m
+dalvik.vm.heapsize=768m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapmaxfree=8m
+
+# DPI
+ro.sf.lcd_density=480
 
 # Factory Reset Protection
 ro.frp.pst=/dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT
@@ -28,6 +40,9 @@ telephony.lteOnCdmaDevice=0
 
 # read DS/SS property
 import /efs/factory.prop
+
+# ro.product.first_api_level indicates the first api level the device has commercially launched on.
+ro.product.first_api_level=23
 
 # Sdcardfs
 ro.sys.sdcardfs=true

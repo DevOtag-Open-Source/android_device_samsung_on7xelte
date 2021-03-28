@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 TeamNexus
+ * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2014 The CyanogenMod Project <http://www.cyanogenmod.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#ifndef _BDROID_BUILDCFG_H
+#define _BDROID_BUILDCFG_H
+
+#define BTM_DEF_LOCAL_NAME   "J7 Prime"
+
+#define BTM_WBS_INCLUDED TRUE       /* Enable WBS */
+#define BTIF_HF_WBS_PREFERRED TRUE  /* Use WBS    */
+
+#define BLE_VND_INCLUDED    TRUE
+
+/* Disable the eSCO commands */
+#define BTM_SCO_ENHANCED_SYNC_ENABLED FALSE
+
+#endif

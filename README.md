@@ -1,43 +1,12 @@
------------------------------------------------------------
-# Common Device Configuration For Samsung Exynos 7870 Series
------------------------------------------------------------
+Device configuration for the Samsung Galaxy J7 Prime
 
-### Copyright
+Copyright (C) 2017 The LineageOS Project
+Copyright (C) 2017 Siddhant Naik
 
-	Copyright (C) 2018 Siddhant Naik (Darklord1731)
-	Copyright (C) 2018 Shivam Jha
-	Copyright (C) 2018 Mohi1117
-	Copyright (C) 2018 Oves Bilal
-	Copyright (C) 2018 Sean Hoyt
-	Copyright (C) 2018 Ananjaser (Anan1211)
-	Copyright (C) 2018 Matt Grf (McFy49)
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-### License
-Apache License 2.0 (Apache-2.0) (Located at LICENSE, read more at [tldrlegal.com/license/apache-license-2.0](https://tldrlegal.com/license/apache-license-2.0-%28apache-2.0%29))
+      http://www.apache.org/licenses/LICENSE-2.0
 
-Short (no legal advice) summary of the used license:
-
-
-**Can**
-
- * Commercial Use
- * Modify
- * Distribute
- * Sublicense
- * Private Use
- * Use Patent Claims
- * Place Warranty
- 
-
-**Cannot**
-
- * Hold Liable
- * Use Trademark 
-
-
-**Must**
-
- * **Include Copyright**
- * **Include License**
- * **State Changes**
- * **Include Notice**
+------------------------------------------------------------------
