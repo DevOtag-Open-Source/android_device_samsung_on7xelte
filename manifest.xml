@@ -26,19 +26,6 @@
     </hal>
 
     <!--
-        Cas
-      -->
-    <hal format="hidl">
-        <name>android.hardware.cas</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMediaCasService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!--
         Configstore
       -->
     <hal format="hidl">
