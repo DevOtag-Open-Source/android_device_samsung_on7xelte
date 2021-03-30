@@ -1,20 +1,31 @@
 <manifest version="1.0" type="device" target-level="legacy">
-    <!--
-        Bluetooth
-      -->
+    <hal format="hidl">
+        <name>android.hardware.audio</name>
+        <transport>hwbinder</transport>
+        <version>6.0</version>
+        <interface>
+            <name>IDevicesFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.audio.effect</name>
+        <transport>hwbinder</transport>
+        <version>6.0</version>
+        <interface>
+            <name>IEffectsFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IBluetoothHci</name>
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Camera
-      -->
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>
@@ -24,13 +35,8 @@
             <instance>legacy/0</instance>
         </interface>
     </hal>
-
-    <!--
-        Configstore
-      -->
     <hal format="hidl">
         <name>android.hardware.configstore</name>
-        <impl level="generic"></impl>
         <transport>hwbinder</transport>
         <version>1.1</version>
         <interface>
@@ -38,10 +44,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        DRM
-      -->
     <hal format="hidl">
         <name>android.hardware.drm</name>
         <transport>hwbinder</transport>
@@ -52,15 +54,11 @@
             <instance>default</instance>
         </interface>
         <interface>
-             <name>IDrmFactory</name>
-             <instance>widevine</instance>
-             <instance>default</instance>
-         </interface>
+            <name>IDrmFactory</name>
+            <instance>widevine</instance>
+            <instance>default</instance>
+        </interface>
     </hal>
-
-    <!--
-        GPS
-      -->
     <hal format="hidl">
         <name>android.hardware.gnss</name>
         <transport arch="32">passthrough</transport>
@@ -70,10 +68,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Graphics
-      -->
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
         <transport>hwbinder</transport>
@@ -83,7 +77,15 @@
             <instance>default</instance>
         </interface>
     </hal>
-
+    <hal format="hidl">
+        <name>android.hardware.graphics.composer</name>
+        <transport>hwbinder</transport>
+        <version>2.2</version>
+        <interface>
+            <name>IComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.mapper</name>
         <transport arch="32">passthrough</transport>
@@ -93,34 +95,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.1</version>
-        <interface>
-            <name>IComposer</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    
-    <!--
-        Healthd
-      -->
-    <hal format="hidl">
-        <name>android.hardware.health</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IHealth</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!--
-        Keymaster
-      -->
-    <hal format="hidl">
+    <hal format="hidl" override="true">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>
         <version>3.0</version>
@@ -129,23 +104,28 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Lights
-      -->
     <hal format="hidl">
         <name>android.hardware.light</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>ILight</name>
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Memtracker
-      -->
+    <hal format="hidl">
+        <name>android.hardware.media.omx</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IOmx</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IOmxStore</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.memtrack</name>
         <transport>hwbinder</transport>
@@ -155,10 +135,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Power
-      -->
     <hal format="hidl">
         <name>android.hardware.power</name>
         <transport>hwbinder</transport>
@@ -168,10 +144,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Radio
-      -->
     <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
@@ -187,7 +159,6 @@
             <instance>slot2</instance>
         </interface>
     </hal>
-
     <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
         <transport>hwbinder</transport>
@@ -198,10 +169,6 @@
             <instance>slot2</instance>
         </interface>
     </hal>
-
-    <!--
-        Renderscript
-      -->
     <hal format="hidl">
         <name>android.hardware.renderscript</name>
         <transport arch="32">passthrough</transport>
@@ -211,29 +178,12 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!--
-        Sensors
-      -->
     <hal format="hidl">
         <name>android.hardware.sensors</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>ISensors</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!--
-        Vibrator
-      -->
-    <hal format="hidl">
-        <name>android.hardware.vibrator</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IVibrator</name>
             <instance>default</instance>
         </interface>
     </hal>

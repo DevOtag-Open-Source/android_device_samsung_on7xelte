@@ -30,14 +30,17 @@ TARGET_SCREEN_HEIGHT := 1920
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.universal7870 \
+    android.hardware.audio@6.0-impl \
+    android.hardware.audio.service \
+    android.hardware.audio.effect@6.0-impl \
     audio.a2dp.default \
-    audio.usb.default \
+    audio.primary.default \
+    audio.primary.universal7870 \
     audio.r_submix.default \
-    tinymix \
+    audio.sec_primary.default \
+    audio.usb.default \
     libtinycompress \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl
+    tinymix
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_effects.xml:/system/vendor/etc/audio_effects.xml \
@@ -55,18 +58,19 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
 # Camera
  PRODUCT_PACKAGES += \
-    camera.universal7870 \
-    libexynoscamera_shim \
-    libstagefright_shim \
-    libcamera_client_shim \
-    camera.device@3.2-impl \
-    camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
+    android.hardware.camera.provider@2.4-service \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    camera.universal7870 \
+    libcamera_client_shim \
+    libexynoscamera_shim \
+    libstagefright_shim
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/camera/external_camera_config.xml:system/vendor/etc/external_camera_config.xml
@@ -76,21 +80,26 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     lineage_charger_res_images
 
+# Configstore
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-service
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.3-service.clearkey
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprint.exynos5 \
-    libbauthtzcommon_shim \
     android.hardware.biometrics.fingerprint@2.1-impl \
-    android.hardware.biometrics.fingerprint@2.1-service
+    android.hardware.biometrics.fingerprint@2.1-service \
+    fingerprint.exynos5 \
+    libbauthtzcommon_shim
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl
+    android.hardware.gnss@1.0-impl \
     gpsd_shim
 
 PRODUCT_COPY_FILES += \
@@ -101,13 +110,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.composer@2.2-service \
     android.hardware.graphics.mapper@2.0-impl
 
 # Healthd
 PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl \
-    android.hardware.health@1.0-service
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -121,8 +130,8 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service.samsung \
     lights.universal7870 \
-    android.hardware.light@2.0-impl
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -139,8 +148,8 @@ PRODUCT_PACKAGES += \
 
 # Omx Shims
 PRODUCT_PACKAGES  += \
+    libExynosOMX_shim \
     libui_shim \
-    libExynosOMX_shim
 
 # Memory
 PRODUCT_PACKAGES += \
@@ -179,8 +188,8 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service \
     android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service \
     power.universal7870
 
 # Radio
@@ -241,8 +250,8 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-service \
-    android.hardware.sensors@1.0-impl
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 # Skeletons
 PRODUCT_PACKAGES += \
@@ -252,6 +261,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     textclassifier.bundle1
 
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.mock
+
 # Touchscreen
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/AVRCP.idc:system/vendor/usr/idc/AVRCP.idc \
@@ -260,7 +273,6 @@ PRODUCT_COPY_FILES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-impl \
     android.hardware.usb@1.0-service
 
 # Wi-Fi
@@ -285,8 +297,7 @@ PRODUCT_COPY_FILES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-service \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.3-service.samsung
 
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/on7xelte/on7xelte-vendor.mk)
