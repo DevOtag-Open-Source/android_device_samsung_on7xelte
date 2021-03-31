@@ -207,6 +207,7 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
 
 # Shim
 TARGET_LD_SHIM_LIBS += \
+    /system/bin/gpsd|gpsd_shim.so \
     /system/lib/libbauthserver.so|/vendor/lib/libbauthtzcommon_shim.so \
     /system/lib/libcamera_client.so|/vendor/lib/libcamera_client_shim.so \
     /system/lib/libstagefright.so|/vendor/lib/libstagefright_shim.so \
