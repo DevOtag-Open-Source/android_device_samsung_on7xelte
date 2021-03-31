@@ -194,7 +194,8 @@ PRODUCT_PACKAGES += \
     libreference-ril \
     libril \
     android.hardware.radio@1.0 \
-    android.hardware.radio.deprecated@1.0
+    android.hardware.radio.deprecated@1.0 \
+    libcutils_shim
 
 # IPv6
 PRODUCT_PACKAGES += \
