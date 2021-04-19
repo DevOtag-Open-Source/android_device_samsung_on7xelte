@@ -6,10 +6,6 @@ import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.power.rc
 import /vendor/etc/init/hw/init.logger.rc
 
-on early-init
-    mkdir /efs 0771 radio system
-    mkdir /cpefs 0771 radio system
-
 on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /storage/emulated 0555 root root
@@ -394,11 +390,6 @@ on late-fs
 
     setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
-
-    # For cpefs partition
-    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/CPEFS /cpefs noatime nosuid nodev barrier=1
-    chown radio system /cpefs
-    chmod 0771 /cpefs
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.samsungexynos7870 --late
