@@ -150,11 +150,6 @@ PRODUCT_PACKAGES += \
     libion \
     libfimg
 
-# Omx Shims
-PRODUCT_PACKAGES  += \
-    libExynosOMX_shim \
-    libui_shim \
-
 # Memory
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
