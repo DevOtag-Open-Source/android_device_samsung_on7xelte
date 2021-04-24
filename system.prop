@@ -53,6 +53,9 @@ ro.product.first_api_level=23
 # Sdcardfs
 ro.sys.sdcardfs=true
 
+# Set fdsan security level warn once
+debug.fdsan=warn_once
+
 # Wifi
 wifi.interface=wlan0
 
