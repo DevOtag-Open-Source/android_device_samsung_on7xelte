@@ -213,7 +213,8 @@ TARGET_LD_SHIM_LIBS += \
     /system/lib/libcamera_client.so|/vendor/lib/libcamera_client_shim.so \
     /system/lib/libsec-ril.so|libcutils_shim.so \
     /system/lib/libsec-ril-dsds.so|libcutils_shim.so \
-    /system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so
+    /system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so \
+    /system/vendor/lib/mediadrm/libwvdrmengine.so|libprotobuf-cpp-lite-v29.so
 
 # Shim-OMX
 TARGET_LD_SHIM_LIBS += \

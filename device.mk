@@ -296,5 +296,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.3-service.samsung
 
+# Vndk
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so
+
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/on7xelte/on7xelte-vendor.mk)
