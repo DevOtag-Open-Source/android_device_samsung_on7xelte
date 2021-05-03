@@ -1,6 +1,9 @@
 /dev/mali0                0666   system     system
 /dev/ion                  0666   system     system
 
+# Secure MEM driver
+/dev/s5p-smem             0660   system     system
+
 # media0 is used for GSC, DECON, etc
 /dev/media0               0660   system     camera
 
