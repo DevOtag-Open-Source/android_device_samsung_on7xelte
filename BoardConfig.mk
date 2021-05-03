@@ -128,7 +128,6 @@ ifeq ($(HOST_OS),linux)
     WITH_DEXPREOPT ?= true
   endif
 endif
-WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= true
 
 # DexPreopt debug info
 WITH_DEXPREOPT_DEBUG_INFO := false
