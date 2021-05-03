@@ -125,9 +125,12 @@ BACKLIGHT_PATH := /sys/class/backlight/panel/brightness
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
-    WITH_DEXPREOPT ?= true
+    WITH_DEXPREOPT := true
   endif
 endif
+
+# Recommend using the non debug dexpreopter
+USE_DEX2OAT_DEBUG := false
 
 # DexPreopt debug info
 WITH_DEXPREOPT_DEBUG_INFO := false
