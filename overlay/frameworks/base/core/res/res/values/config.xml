@@ -109,8 +109,8 @@
          states. -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
-    <!-- Disable AOD by default -->
-    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+    <!-- Enable AOD by default -->
+    <bool name="config_dozeAlwaysOnEnabled">true</bool>
 
     <!-- If supported, are dreams(screen saver) enabled? (by default) -->
     <bool name="config_dreamsEnabledByDefault">false</bool>
