@@ -139,6 +139,9 @@ TARGET_USES_MKE2FS := true
 # Fingerprint HAL to be built from hardware/samsung
 TARGET_SEC_FP_HAL_VARIANT := bauth
 
+# Fonts
+EXCLUDE_SERIF_FONTS := true
+
 # Graphics
 USE_OPENGL_RENDERER := true
 BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
