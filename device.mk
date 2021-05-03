@@ -87,6 +87,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.1-service
 
+# Disable trace
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.traced.enable=0
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
