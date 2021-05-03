@@ -38,6 +38,9 @@ persist.sys.sf.disable_blurs=true
 # Boot directly from charger mode
 ro.enable_boot_charger_mode=1
 
+# Netflix
+ro.netflix.bsp_rev=Q660-13149-1
+
 # Radio
 persist.radio.sib16_support=0
 ro.ril.hsxpa=1
