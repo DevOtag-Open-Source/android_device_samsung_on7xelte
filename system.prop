@@ -16,6 +16,8 @@ dalvik.vm.heapsize=768m
 dalvik.vm.heaptargetutilization=0.75
 dalvik.vm.heapminfree=512k
 dalvik.vm.heapmaxfree=8m
+dalvik.vm.minidebuginfo=false
+dalvik.vm.dex2oat-minidebuginfo=false
 
 # DPI
 ro.sf.lcd_density=480
