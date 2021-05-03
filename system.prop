@@ -29,6 +29,9 @@ debug.hwc.skip_dma_types=0,2
 debug.hwc.force_gpu=1
 debug.sf.disable_backpressure=1
 debug.sf.latch_unsignaled=1
+persist.hwc.ptor.enable=true
+ro.surface_flinger.supports_background_blur=false
+persist.sys.sf.disable_blurs=true
 
 # Boot directly from charger mode
 ro.enable_boot_charger_mode=1
