@@ -141,6 +141,7 @@ TARGET_SEC_FP_HAL_VARIANT := bauth
 
 # Fonts
 EXCLUDE_SERIF_FONTS := true
+SMALLER_FONT_FOOTPRINT := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
