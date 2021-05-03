@@ -113,6 +113,7 @@ TARGET_OMX_LEGACY_RESCALING := true
 # Camera
 # Force boottime offset calculation
 TARGET_CAMERA_BOOTTIME_TIMESTAMP := true
+MALLOC_SVELTE_FOR_LIBC32 := true
 
 # Charger
 WITH_LINEAGE_CHARGER := false
