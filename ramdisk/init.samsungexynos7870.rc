@@ -441,6 +441,7 @@ on property:ro.multisim.simslotcount=2
     setprop persist.radio.multisim.config dsds
 
 on charger
+    exec - root -- /system/bin/sh -c "touch /efs/test"
     chmod 0664 /sys/class/power_supply/battery/batt_temp_table
     chown system radio /sys/class/power_supply/battery/batt_temp_table
     chmod 0664 /sys/class/power_supply/battery/batt_capacity_max
