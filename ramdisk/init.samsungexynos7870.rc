@@ -490,3 +490,5 @@ service charger /system/bin/charger
 
 on property:sys.boot_completed=1
     setprop sys.io.scheduler bfq
+    # force disable hw overlays to be true
+    exec - root -- /system/bin/sh -c "service call SurfaceFlinger 1008 i32 1"
