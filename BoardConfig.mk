@@ -278,3 +278,6 @@ BOARD_HAVE_SAMSUNG_WIFI          := true
 
 # Inherit from the proprietary version
 -include vendor/samsung/on7xelte/BoardConfigVendor.mk
+
+# Build fingerprint Raven march 2022
+BUILD_FINGERPRINT := "google/raven/raven:12/S3B1.220218.006/8325196:user/release-keys"
